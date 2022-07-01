@@ -13,7 +13,7 @@ class MyReactActivity : Activity(), DefaultHardwareBackBtnHandler {
     private lateinit var reactRootView: ReactRootView
     private lateinit var reactInstanceManager: ReactInstanceManager
     override fun onCreate(savedInstanceState: Bundle?) {
-       // println("In FReact Activity")
+        // println("In FReact Activity")
         super.onCreate(savedInstanceState)
         SoLoader.init(this, false)
         reactRootView = ReactRootView(this)
@@ -33,26 +33,49 @@ class MyReactActivity : Activity(), DefaultHardwareBackBtnHandler {
             .build()
         // The string here (e.g. "MyReactNativeApp") has to match
         // the string in AppRegistry.registerComponent() in index.js
-        reactRootView?.startReactApplication(reactInstanceManager, "MyReactNativeApp", null)
+        //val initialProperties =  arguments as Bundle
+//        val initialProperties = Bundle().apply {
+//            putString("images", "HIIIIII")
 
 
+//        }
+        val initialProperties = intent?.getBundleExtra("images")
 
-        // Send message from native code
-     /*   val initialProperties = Bundle()
-        initialProperties.putString("data", intent?.extras?.
-        get("data")?.toString())
-        (reactRootView as ReactRootView).
-        startReactApplication(reactInstanceManager, "RNIntegration", initialProperties)*/
-
-        setContentView(reactRootView
+        reactRootView?.startReactApplication(
+            reactInstanceManager,
+            "MyReactNativeActivity",
+            initialProperties
         )
 
 
+        // Send message from native code
+        /*   val initialProperties = Bundle()
+           initialProperties.putString("data", intent?.extras?.
+           get("data")?.toString())
+           (reactRootView as ReactRootView).
+           startReactApplication(reactInstanceManager, "RNIntegration", initialProperties)*/
 
-
-
-
+        setContentView(
+            reactRootView
+        )
     }
+
+//    override fun createReactActivityDelegate(): ReactActivityDelegate {
+//
+//        val data = intent.getStringExtra("data")
+//        return object : ReactActivityDelegate(this, "MyReactNativeActivity") {
+//            override fun getLaunchOptions(): Bundle {
+//
+//
+//                //  val imageList = arrayListOf("http://foo.com/bar1.png", "http://foo.com/bar2.png")
+//                //   val initialProperties = Bundle().apply { putStringArrayList("images", imageList) }
+//                val initialProperties = Bundle().apply {
+//                    putString("images", data)
+//                }
+//                return initialProperties
+//            }
+//        }
+//    }
 
     override fun invokeDefaultOnBackPressed() {
         super.onBackPressed()
@@ -73,10 +96,12 @@ class MyReactActivity : Activity(), DefaultHardwareBackBtnHandler {
         reactInstanceManager.onHostDestroy(this)
         reactRootView.unmountReactApplication()
     }
+
     override fun onBackPressed() {
         reactInstanceManager.onBackPressed()
         super.onBackPressed()
     }
+
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_MENU && reactInstanceManager != null) {
             reactInstanceManager.showDevOptionsDialog()
@@ -84,13 +109,6 @@ class MyReactActivity : Activity(), DefaultHardwareBackBtnHandler {
         }
         return super.onKeyUp(keyCode, event)
     }
-
-
-
-
-
-
-
 
 
 }

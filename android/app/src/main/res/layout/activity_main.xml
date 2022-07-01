@@ -6,13 +6,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:name="com.example.rnintegration.ReactFragment"
+    android:id="@+id/frag_host"
+
+   />
+   <EditText
+       android:layout_width="250dp"
+       android:layout_height="wrap_content"
+        android:hint="Type text here"
+        android:id="@+id/editext"
+       android:layout_gravity="center"
+       android:layout_marginTop="30dp"
+       />
+   <Button
+       android:id="@+id/button2"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center"
+       android:layout_marginTop="50dp"
+       android:gravity="center"
+       android:text="Go To React Native Fragment" />
 
    <Button
        android:id="@+id/button"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_gravity="center"
-       android:layout_marginTop="3in"
+       android:layout_marginTop="30dp"
        android:gravity="center"
        android:text="Go To React Native Screen" />
 

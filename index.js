@@ -10,6 +10,11 @@ import App from "./src/index"
 
 
 AppRegistry.registerComponent(
-  'MyReactNativeApp',
+  'MyReactNativeActivity',
+  () => App
+);
+
+AppRegistry.registerComponent(
+  'MyReactNativeFragment',
   () => App
 );
